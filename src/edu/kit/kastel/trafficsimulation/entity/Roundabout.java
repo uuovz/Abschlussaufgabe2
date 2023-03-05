@@ -7,8 +7,8 @@ public class Roundabout extends Crossing {
     }
 
     @Override
-    public Road cross(int i) {
-        return null;
+    public Street cross(Car car, int preference) {
+        return getStreetOfPreference(preference);
     }
 
 

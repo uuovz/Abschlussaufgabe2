@@ -5,7 +5,6 @@ import edu.kit.kastel.trafficsimulation.io.Executable;
 import edu.kit.kastel.trafficsimulation.setup.Config;
 import edu.kit.kastel.trafficsimulation.simulator.Simulation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +12,14 @@ public class CommandParser implements Executable {
 
     private static final String EXCEPTION_INVALID = "Your command was invalid.";
     private boolean active = true;
-    private final Config config;
-    private final Simulation simulation;
-    private final Command commandExit = new CommandQuit(this);
     private final List<Command> commands = new ArrayList<>();
 
 
     public CommandParser(Config config, Simulation simulation) {
-        this.config = config;
-        this.simulation = simulation;
         this.commands.add(new CommandQuit(this));
         this.commands.add(new CommandLoad(config, simulation));
+        this.commands.add(new CommandPosition(simulation));
+        this.commands.add(new CommandSimulate(simulation));
     }
 
 

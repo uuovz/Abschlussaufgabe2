@@ -1,22 +1,22 @@
 package edu.kit.kastel.trafficsimulation.utility;
 
-import edu.kit.kastel.trafficsimulation.entity.Road;
+import edu.kit.kastel.trafficsimulation.entity.Street;
 
 public class Position {
 
     private int mileage;
-    private Road road;
+    private Street street;
 
-    public Position(Road road) {
-        this.road = road;
+    public Position(Street street) {
+        this.street = street;
     }
 
-    public Road getRoad() {
-        return road;
+    public Street getStreet() {
+        return street;
     }
 
-    public void setRoad(Road street) {
-        this.road = street;
+    public void setStreet(Street street) {
+        this.street = street;
     }
 
     public int getMileage() {
@@ -26,4 +26,5 @@ public class Position {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+
 }

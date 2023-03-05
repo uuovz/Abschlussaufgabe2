@@ -1,6 +1,7 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
 import edu.kit.kastel.trafficsimulation.SimulationException;
+import edu.kit.kastel.trafficsimulation.utility.Tick;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,31 +10,34 @@ import java.util.Map;
 
 public class Graph {
 
-    private static final  String CONNECTION_ERROR = "Failure in dataset";
-    private final Map<Integer, Road> idRoadMap;
-    private final List<Integer> edgePlaceOrder;
+    private static final  String CONNECTION_ERROR = "Missing incoming/outgoing crossing in a road %d. ";
+    private final Map<Integer, Street> idRoadMap;
+    private final List<Integer> streetPlaceOrder;
     private final Map<Integer, Crossing> idCrossingMap;
     private final CarCollection carCollection;
 
-    public Graph(CarCollection carCollection, Map<Integer, Road> idRoadMap, List<Integer> roadPlaceOrder,
+    public Graph(Tick tick, CarCollection carCollection, Map<Integer, Street> idRoadMap, List<Integer> streetPlaceOrder,
                  Map<Integer, Crossing> idCrossingMap) {
         this.carCollection = carCollection;
         this.idRoadMap = new HashMap<>(idRoadMap);
-        this.edgePlaceOrder = new ArrayList<>(roadPlaceOrder);
+        this.streetPlaceOrder = new ArrayList<>(streetPlaceOrder);
         this.idCrossingMap = new HashMap<>(idCrossingMap);
+        for (Crossing crossing: idCrossingMap.values()) {
+            crossing.setTick(tick);
+        }
     }
 
     public void connect() {
-        for (Integer id: edgePlaceOrder) {
-            Road road = this.idRoadMap.get(id);
-            road.setCarCollection(this.carCollection);
-            Crossing outGoingcrossing = road.getStartCrossing();
-            Crossing incomingGoingcrossing = road.getEndCrossing();
+        for (Integer id: streetPlaceOrder) {
+            Street street = this.idRoadMap.get(id);
+            street.setCarCollection(this.carCollection);
+            Crossing outGoingcrossing = street.getStartCrossing();
+            Crossing incomingGoingcrossing = street.getEndCrossing();
             if (outGoingcrossing == null || incomingGoingcrossing == null) {
-                throw new SimulationException(CONNECTION_ERROR);
+                throw new SimulationException(String.format(CONNECTION_ERROR, id));
             }
-            outGoingcrossing.addOutgoingRoad(road);
-            incomingGoingcrossing.addIncomingRoad(road);
+            outGoingcrossing.addOutgoingStreet(street);
+            incomingGoingcrossing.addIncomingStreet(street);
 
         }
     }
