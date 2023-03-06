@@ -1,7 +1,5 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
-import edu.kit.kastel.trafficsimulation.utility.Position;
-
 import java.util.Comparator;
 
 public class CarPositionComparator implements Comparator<Car> {

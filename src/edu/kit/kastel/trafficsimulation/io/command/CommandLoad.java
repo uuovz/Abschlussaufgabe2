@@ -9,9 +9,9 @@ import edu.kit.kastel.trafficsimulation.entity.SingleLane;
 import edu.kit.kastel.trafficsimulation.entity.Street;
 import edu.kit.kastel.trafficsimulation.entity.TwoLane;
 import edu.kit.kastel.trafficsimulation.io.SimulationFileLoader;
-import edu.kit.kastel.trafficsimulation.setup.Config;
+import edu.kit.kastel.trafficsimulation.simulator.Config;
 import edu.kit.kastel.trafficsimulation.simulator.Simulation;
-import edu.kit.kastel.trafficsimulation.utility.Position;
+import edu.kit.kastel.trafficsimulation.entity.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;

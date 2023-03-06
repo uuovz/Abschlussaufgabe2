@@ -1,7 +1,5 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
-import edu.kit.kastel.trafficsimulation.utility.Tick;
-
 public class Intersection extends Crossing {
     private final int greenphaseDuration;
 
@@ -20,7 +18,7 @@ public class Intersection extends Crossing {
     }
 
     private int greenLightStreetIndex() {
-        return this.tick.getTick() / this.greenphaseDuration % this.incomingRoads.size();
+        return (this.tick.getTick() / this.greenphaseDuration) % this.incomingRoads.size();
     }
 
 

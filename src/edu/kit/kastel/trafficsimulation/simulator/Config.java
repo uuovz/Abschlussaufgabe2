@@ -1,4 +1,4 @@
-package edu.kit.kastel.trafficsimulation.setup;
+package edu.kit.kastel.trafficsimulation.simulator;
 
 import edu.kit.kastel.trafficsimulation.entity.Car;
 import edu.kit.kastel.trafficsimulation.entity.Crossing;

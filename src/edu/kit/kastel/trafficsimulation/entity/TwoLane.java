@@ -12,29 +12,24 @@ public class TwoLane extends Street {
 
     @Override
     public int calculateDrivingDistance(Car car, int distance) {
+        lastCarOvertake = null;
         List<Car> carsOnStreet = this.carCollection.getCarsOnStreet(this);
         Car nextCar = getNextCar(carsOnStreet, car);
-        Car nextNextCar = getNextCar(carsOnStreet, car);
         if (nextCar == null) {
             return distance;
         }
-        int nextCarMileage = nextCar.getPosition().getMileage();
-        int nextNextCarMileage = nextNextCar.getPosition().getMileage();
-        if (distance > nextCarMileage + MIN_DISTANCE && distance < nextNextCarMileage - MIN_DISTANCE) {
+        Car nextNextCar = getNextCar(carsOnStreet, nextCar);
+        if (nextNextCar == null && distance >= getDistanceBetweenCars(car ,nextCar) + MIN_DISTANCE) {
+            return distance;
+        }
+        if (distance >= getDistanceBetweenCars(car ,nextCar) + MIN_DISTANCE && nextNextCar != null &&
+            getDistanceBetweenCars(car ,nextCar) + MIN_DISTANCE <=
+                getDistanceBetweenCars(car, nextNextCar) - MIN_DISTANCE ) {
             this.lastCarOvertake = car;
             return getDriveDistance(getDistanceBetweenCars(car, nextNextCar), distance);
         }
-        return getDriveDistance(getDistanceBetweenCars(car, nextCar), distance);
-    }
 
-    @Override
-    public int calculateGetOnStreetDistance(int distance) {
-        List<Car> carsOnStreet = this.carCollection.getCarsOnStreet(this);
-        Car lastCar = getLastCar(carsOnStreet);
-        if (lastCar == null) {
-            return Math.min(distance, this.getLength());
-        }
-        return getDriveDistance(lastCar.getPosition().getMileage(), distance);
+        return getDriveDistance(getDistanceBetweenCars(car, nextCar), distance);
     }
 
     @Override

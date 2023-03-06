@@ -1,7 +1,6 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
 import edu.kit.kastel.trafficsimulation.SimulationException;
-import edu.kit.kastel.trafficsimulation.utility.Position;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ public abstract class Street {
     }
 
     public abstract int calculateDrivingDistance(Car car, int distance);
-    public abstract int calculateGetOnStreetDistance(int distance);
     public abstract boolean didCarOvertake(Car car);
 
     public int getLength() { return length; }
@@ -53,6 +51,15 @@ public abstract class Street {
 
     public void setCarCollection(CarCollection carCollection) {
         this.carCollection = carCollection;
+    }
+
+    public int calculateGetOnStreetDistance(int distance) {
+        List<Car> carsOnStreet = this.carCollection.getCarsOnStreet(this);
+        Car lastCar = getLastCar(carsOnStreet);
+        if (lastCar == null) {
+            return Math.min(distance, this.getLength());
+        }
+        return getDriveDistance(lastCar.getPosition().getMileage(), distance);
     }
 
     protected static int getDistanceBetweenCars(Car carA, Car carB) {

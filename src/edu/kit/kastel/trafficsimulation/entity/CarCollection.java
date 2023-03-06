@@ -1,7 +1,5 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
-import edu.kit.kastel.trafficsimulation.utility.Position;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,5 +47,10 @@ public class CarCollection {
         for (Car car: allCars) {
             car.simulate();
         }
+        for (int i = 0; i < 34; i++) {
+            Car car = getCarById(i);
+            System.out.println(String.format("Car %d on street %d with speed %d and position %d", car.getId(), car.getPosition().getStreet().getId(), car.getSpeed(), car.getPosition().getMileage()));
+        }
+
     }
 }

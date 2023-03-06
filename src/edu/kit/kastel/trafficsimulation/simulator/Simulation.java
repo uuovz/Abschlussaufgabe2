@@ -3,8 +3,7 @@ package edu.kit.kastel.trafficsimulation.simulator;
 import edu.kit.kastel.trafficsimulation.entity.Car;
 import edu.kit.kastel.trafficsimulation.entity.CarCollection;
 import edu.kit.kastel.trafficsimulation.entity.Graph;
-import edu.kit.kastel.trafficsimulation.setup.Config;
-import edu.kit.kastel.trafficsimulation.utility.Tick;
+import edu.kit.kastel.trafficsimulation.entity.Tick;
 
 
 public class Simulation {
@@ -28,6 +27,7 @@ public class Simulation {
     }
 
     public void simulate() {
+        System.out.println("Tick: " + this.tick.getTick());
         this.carCollection.simulate();
         this.tick.simulate();
     }

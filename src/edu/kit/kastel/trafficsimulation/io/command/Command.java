@@ -9,6 +9,7 @@ public abstract class Command {
     protected static final String REGEX_ALL = ".*";
     protected static final String EMPTY_STRING = "";
     protected static final String OUTPUT_MESSAGE_READY = "READY";
+    protected static final String EXCEPTION_CONFIGURED = "Simulation has to be loaded first.";
     private static final int ARGUMENT_INDEX = 1;
     private static final int ARGUMENT_COUNT = 2;
     private static final String EXCEPTION_TEMPLATE_ARGUMENT = "There are just two arguments allowed. Your tried %s";

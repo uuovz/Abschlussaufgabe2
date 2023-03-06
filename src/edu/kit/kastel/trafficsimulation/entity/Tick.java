@@ -1,4 +1,4 @@
-package edu.kit.kastel.trafficsimulation.utility;
+package edu.kit.kastel.trafficsimulation.entity;
 
 public class Tick {
 

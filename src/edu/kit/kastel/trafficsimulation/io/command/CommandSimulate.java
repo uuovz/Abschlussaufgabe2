@@ -6,8 +6,6 @@ import edu.kit.kastel.trafficsimulation.simulator.Simulation;
 import java.util.regex.Pattern;
 
 public class CommandSimulate extends Command {
-
-    private static final String EXCEPTION_CONFIGURED = "Simulation has to be loaded first.";
     private static final String regularExpression = "simulate" + REGEX_ALL;
     private static final Pattern pattern = Pattern.compile(regularExpression);
     private final Simulation simulation;

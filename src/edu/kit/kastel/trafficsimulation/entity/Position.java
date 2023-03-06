@@ -1,6 +1,4 @@
-package edu.kit.kastel.trafficsimulation.utility;
-
-import edu.kit.kastel.trafficsimulation.entity.Street;
+package edu.kit.kastel.trafficsimulation.entity;
 
 public class Position {
 

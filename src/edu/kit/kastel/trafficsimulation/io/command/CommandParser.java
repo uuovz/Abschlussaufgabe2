@@ -2,7 +2,7 @@ package edu.kit.kastel.trafficsimulation.io.command;
 
 import edu.kit.kastel.trafficsimulation.SimulationException;
 import edu.kit.kastel.trafficsimulation.io.Executable;
-import edu.kit.kastel.trafficsimulation.setup.Config;
+import edu.kit.kastel.trafficsimulation.simulator.Config;
 import edu.kit.kastel.trafficsimulation.simulator.Simulation;
 
 import java.util.ArrayList;
@@ -29,6 +29,7 @@ public class CommandParser implements Executable {
                 return command.execute(commandString);
             }
         }
+
         throw new SimulationException(EXCEPTION_INVALID);
     }
 

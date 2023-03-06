@@ -19,16 +19,6 @@ public class SingleLane extends Street {
     }
 
     @Override
-    public int calculateGetOnStreetDistance(int distance) {
-        List<Car> carsOnStreet = this.carCollection.getCarsOnStreet(this);
-        Car lastCar = getLastCar(carsOnStreet);
-        if (lastCar == null) {
-            return Math.min(distance, this.getLength());
-        }
-        return getDriveDistance(lastCar.getPosition().getMileage(), distance);
-    }
-
-    @Override
     public boolean didCarOvertake(Car car) {
         return false;
     }

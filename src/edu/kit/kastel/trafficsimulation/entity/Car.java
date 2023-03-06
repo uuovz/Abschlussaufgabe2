@@ -1,7 +1,5 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
-import edu.kit.kastel.trafficsimulation.utility.Position;
-
 public class Car {
 
     private final int id;
@@ -35,22 +33,25 @@ public class Car {
                 this.drive(actualDriveDistanceOnStreet);
             }
         }
+        int actualDriveDistanceOnNewStreet = 0;
         leftDistanceOnStreet = this.getLeftDistanceOnStreet(street, this.position);
         int leftPossibleDriveDistance = possibleDriveDistance - actualDriveDistanceOnStreet;
         if (leftDistanceOnStreet == 0 && leftPossibleDriveDistance > 0 && !street.didCarOvertake(this)) {
             Street crossingStreet = street.endCrossing.cross(this, this.turnPreference);
             if (crossingStreet != null) {
                 int possibleDriveOnStreet = Math.min(leftPossibleDriveDistance, crossingStreet.getLength());
-                actualDriveDistanceOnStreet = crossingStreet.calculateGetOnStreetDistance(possibleDriveOnStreet);
-                if (actualDriveDistanceOnStreet >= 0) {
+                actualDriveDistanceOnNewStreet = crossingStreet.calculateGetOnStreetDistance(possibleDriveOnStreet);
+                if (actualDriveDistanceOnNewStreet >= 0) {
                     this.crossStreetTo(crossingStreet);
-                    this.drive(actualDriveDistanceOnStreet);
+                    this.drive(actualDriveDistanceOnNewStreet);
                     this.changeTurnPreference();
+                } else {
+                    actualDriveDistanceOnNewStreet = 0;
                 }
             }
         }
 
-        if (actualDriveDistanceOnStreet == 0) {
+        if (actualDriveDistanceOnStreet + actualDriveDistanceOnNewStreet <= 0) {
             this.stop();
         }
 
@@ -72,7 +73,7 @@ public class Car {
 
     private void changeTurnPreference() {
         this.turnPreference += 1;
-        if (turnPreference > Crossing.MAX_ALLOWED_STREETS) {
+        if (turnPreference >= Crossing.MAX_ALLOWED_STREETS) {
             this.turnPreference = 0;
         }
     }

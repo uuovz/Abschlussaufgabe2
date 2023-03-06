@@ -1,7 +1,6 @@
 package edu.kit.kastel.trafficsimulation.entity;
 
 import edu.kit.kastel.trafficsimulation.SimulationException;
-import edu.kit.kastel.trafficsimulation.utility.Tick;
 
 import java.util.ArrayList;
 import java.util.HashMap;
